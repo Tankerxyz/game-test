@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config()
 import { WebSocketServer } from 'ws'
 import { handleConnection, startSendingClientUpdates } from './server/websockets/connectionHandler.js'
 import fs from 'fs'
