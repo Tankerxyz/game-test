@@ -296,9 +296,9 @@ useEffect(() => {
 
    return (
       <div style={{ width: '100%', height: '100vh' }}>
-         {/* <Canvas shadows> */}
-            {/* <Stats /> */}
-            {/* <PerspectiveCamera position={[25, 25, 25]} fov={70} makeDefault />
+         <Canvas>
+            <Stats />
+            <PerspectiveCamera position={[25, 25, 25]} fov={70} makeDefault />
             <color attach="background" args={['black']} />
             <fog attach="fog" color="black" near={50} far={300} />
             <Lighting />
@@ -308,10 +308,10 @@ useEffect(() => {
                <Ground />
                <Forest />
             </Suspense>
-         </Canvas> */}
+         </Canvas>
 
-         {/* <OverlayUIWrapper socket={socket} />
-         <PlayerAudioConnection socket={socket} /> */}
+         <OverlayUIWrapper socket={socket} />
+         <PlayerAudioConnection socket={socket} />
       </div>
    )
 }

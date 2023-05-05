@@ -132,7 +132,7 @@ function getFileName(item) {
 }
 
 export default function Loader() {
-   const { item } = useProgress()
+   const { item, progress } = useProgress()
 
    return (
       <Html fullscreen>
@@ -158,7 +158,7 @@ export default function Loader() {
                />
             </svg>
          </Logo>
-         <LoadingText>loading File - {getFileName(item)}</LoadingText>
+         <LoadingText>loading File - {getFileName(item)} progress - { progress }</LoadingText>
       </Html>
    )
 }
