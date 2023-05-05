@@ -33,7 +33,7 @@ Server localhost:8080
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-Suggestions with improving the server and moving from Socket.io would be much appreciated 
+Suggestions with improving the server and moving from Socket.io would be much appreciated  
 
 ## License
 
