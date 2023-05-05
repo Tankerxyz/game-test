@@ -56,7 +56,7 @@ const App: React.FC = () => {
 
    return (
       <div style={{ width: '100%', height: '100vh' }}>
-         <Canvas shadows>
+         <Canvas>
             <Stats />
             <PerspectiveCamera position={[25, 25, 25]} fov={70} makeDefault />
             <color attach="background" args={['black']} />
