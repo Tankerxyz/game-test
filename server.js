@@ -1,5 +1,5 @@
-// import { WebSocketServer } from 'ws'
-// import { handleConnection, startSendingClientUpdates } from './server/websockets/connectionHandler.js'
+import { WebSocketServer } from 'ws'
+import { handleConnection, startSendingClientUpdates } from './server/websockets/connectionHandler.js'
 import fs from 'fs'
 import Router from 'express-promise-router'
 import viteConfig from './vite.config.js'
@@ -40,33 +40,11 @@ router.use('*', (req, res) => {
 app.use(router)
 
 const httpServer = http.createServer(app)
-// export const wsServer = new WebSocketServer({ server: httpServer })
+export const wsServer = new WebSocketServer({ server: httpServer })
 
-// wsServer.on('connection', handleConnection)
+wsServer.on('connection', handleConnection)
 
-// startSendingClientUpdates()
-
-
-import dgram from 'node:dgram';
-
-const server = dgram.createSocket('udp4');
-
-
-server.on('error', (err) => {
-   console.error(`server error:\n${err.stack}`);
-   server.close();
-});
-
-server.on('message', (msg, rinfo) => {
-   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
-});
-
-server.on('listening', () => {
-   const address = server.address();
-   console.log(`server listening ${address.address}:${address.port}`);
-});
-
-server.bind(41234);
+startSendingClientUpdates()
 
 httpServer.listen(process.env.PORT || 8080, () => {
    console.log(`Listening on port http://localhost:8080...`)
