@@ -4,7 +4,7 @@ A multiplayer game starter built with React Three Fibre (R3F), Node.js, Socket.i
 
 Mobile controls using nippleJS and WASD movement controls on desktop.
 
-![React Three Fibre Multiplayer Game](/screenshot.png)
+![React Three Fibre Multiplayer Game](/screenshot.png) 
 
 ## Installation
 
