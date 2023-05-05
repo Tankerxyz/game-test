@@ -40,7 +40,7 @@
       "vite-plugin-node-polyfills": "^0.7.0"
    },
    "engines": {
-      "node": "18.17.0"
+      "node": "16.17.0"
    },
    "resolutions": {
       "three": "0.150.1"
