@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera, Stats } from '@react-three/drei'
+import {PerspectiveCamera, Stats, useProgress} from '@react-three/drei'
 import Lighting from './Environment/Lighting'
 import Ground from './Environment/Ground'
 import Forest from './Environment/Forest'
@@ -54,6 +54,10 @@ const App: React.FC = () => {
         }
     }, [])
 
+    console.log('render')
+
+    const { total, loaded } = useProgress();
+
     return (
         <div style={{ width: '100%', height: '100vh' }}>
             <Canvas>
@@ -63,15 +67,24 @@ const App: React.FC = () => {
                 <fog attach="fog" color="black" near={50} far={300} />
                 <Lighting />
                 <Suspense fallback={<Loader />}>
-                    <RemotePlayers clientSocket={socket} />
-                    <LocalPlayer clientSocket={socket} />
-                    <Ground />
-                    <Forest />
+                    <>
+                        <RemotePlayers clientSocket={socket} />
+                        <LocalPlayer clientSocket={socket} />
+                        <Ground />
+                        <Forest />
+                    </>
                 </Suspense>
             </Canvas>
+            {
+                loaded >= total ? (
+                    <>
+                        <OverlayUIWrapper socket={socket} />
+                        <PlayerAudioConnection socket={socket} />
+                    </>
 
-            <OverlayUIWrapper socket={socket} />
-            <PlayerAudioConnection socket={socket} />
+                ) : null
+            }
+
         </div>
     )
 }

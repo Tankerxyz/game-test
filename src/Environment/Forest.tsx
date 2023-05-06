@@ -33,38 +33,52 @@ const modelUrlMap = {
    26: '../Models/Forest/Plant_2.fbx',
    27: '../Models/Forest/Plant_3.fbx',
 }
+;
+// const useFBXHandler = (url, scale) => {
+//    const model =
+//       return m
+//    // }, [model, scale])
+//    // return clonedModel
+// }
 
-const useFBXHandler = (url, scale) => {
-   const model = useFBX(url)
-   const clonedModel = useMemo(() => {
-      const m = model.clone()
-      m.scale.setScalar(scale)
-      m.traverse((mesh) => {
-         mesh.castShadow = true
-         mesh.receiveShadow = true
-      })
-      return m
-   }, [model, scale])
-   return clonedModel
+
+const loadCachedModels = () => {
+   const models = {}
+   console.log('start loading???');
+
+   Object.values(modelUrlMap).forEach((url) => {
+      const scale =
+          url.includes('Plant') || url.includes('Flowers') || url.includes('Grass')
+              ? 0.1
+              : url.includes('Log')
+              ? 0.2
+              : 0.5
+
+      // const clonedModel = useMemo(() => {
+      const m = useFBX(url)
+      // m.scale.setScalar(scale)
+      // m.traverse((mesh) => {
+      //    mesh.castShadow = true
+      //    mesh.receiveShadow = true
+      // })
+
+      models[url] = m;
+
+      // console.log('hello?', url);
+
+   })
+   return models
 }
 
 const Forest = () => {
    const largeScenery = useSceneryStore((state) => state.largeScenery)
    const smallScenery = useSceneryStore((state) => state.smallScenery)
 
-   const cachedModels = useMemo(() => {
-      const models = {}
-      Object.values(modelUrlMap).forEach((url) => {
-         const scale =
-            url.includes('Plant') || url.includes('Flowers') || url.includes('Grass')
-               ? 0.1
-               : url.includes('Log')
-               ? 0.2
-               : 0.5
-         models[url] = useFBXHandler(url, scale)
-      })
-      return models
-   }, [])
+   // const cachedModels = loadCachedModels();
+
+   console.log('render forest');
+
+
 
    function createObjects(sceneryData) {
       return sceneryData.map((entity) => {
@@ -84,13 +98,13 @@ const Forest = () => {
       })
    }
 
-   const objectsLRG = createObjects(largeScenery)
-   const objectsSML = createObjects(smallScenery)
+   // const objectsLRG = createObjects(largeScenery)
+   // const objectsSML = createObjects(smallScenery)
 
    return (
       <>
-         {objectsLRG}
-         {objectsSML}
+         {/*{objectsLRG}*/}
+         {/*{objectsSML}*/}
       </>
    )
 }

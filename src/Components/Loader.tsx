@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { useProgress, Html } from '@react-three/drei'
 import styled, { keyframes } from 'styled-components'
 
@@ -132,7 +132,11 @@ function getFileName(item) {
 }
 
 export default function Loader() {
-   const { item, progress } = useProgress()
+   const { loaded, total } = useProgress();
+
+   const loadedPercent = useMemo(() => {
+       return `${~~(loaded > 1 ? (loaded / total) * 100 : 0)}%`
+   }, [loaded, total]);
 
    return (
       <Html fullscreen>
@@ -158,7 +162,7 @@ export default function Loader() {
                />
             </svg>
          </Logo>
-         <LoadingText>loading File - {getFileName(item)} progress - { progress }</LoadingText>
+         <LoadingText> Loading: {loadedPercent}  </LoadingText>
       </Html>
    )
 }
